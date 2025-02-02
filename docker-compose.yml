@@ -1,0 +1,24 @@
+services:
+  app:
+    build:
+      context: .
+    image: wa-server
+    container_name: wa-server
+    ports:
+      - "8080:8080"
+    depends_on:
+      - wa-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-wa:5432/wa
+      - SPRING_DATASOURCE_USERNAME=wa
+      - SPRING_DATASOURCE_PASSWORD=wa
+
+  wa-db:
+    image: postgres:16.1
+    container_name: postgres-wa
+    ports:
+      - "6541:5432"
+    environment:
+      - POSTGRES_PASSWORD=wa
+      - POSTGRES_USER=wa
+      - POSTGRES_DB=wa
