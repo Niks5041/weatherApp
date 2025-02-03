@@ -9,4 +9,5 @@ public interface LocationService {
     List<Location> getAllLocations(Integer userId);
 
     void addLocation(String city, Integer userId);
+
 }

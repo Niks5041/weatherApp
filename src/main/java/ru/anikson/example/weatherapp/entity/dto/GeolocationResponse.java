@@ -1,3 +1,8 @@
 package ru.anikson.example.weatherapp.entity.dto;
 
-public record GeolocationResponse(double lat, double lon) {}
+public record GeolocationResponse(
+        double lon,
+        double lat)
+{
+
+}

@@ -28,10 +28,10 @@ public class WeatherClient {
      */
     public double[] getCoordinatesByCity(String city) {
         String url = String.format("%s/weather?q=%s&appid=%s", geocodingUrl, city, apiKey);
-        GeolocationResponse[] response = restTemplate.getForObject(url, GeolocationResponse[].class);
+        GeolocationResponse response = restTemplate.getForObject(url, GeolocationResponse.class);
 
-        if (response != null && response.length > 0) {
-            return new double[]{response[0].lat(), response[0].lon()};
+        if (response != null) {
+            return new double[]{response.lon(), response.lat()};
         }
         throw new RuntimeException("Не удалось получить координаты для города: " + city);
     }
