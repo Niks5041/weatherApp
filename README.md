@@ -9,9 +9,10 @@
 - **Thymeleaf**
 - **PostgreSQL**
 - **Flyway** (для миграций)
-- **OpenWeatherMap API** (для получения данных о погоде)
+- **OpenWeatherMap API** (для получения данных о погоде) (https://openweathermap.org)
 - **Lombok**
 - **JUnit, Mockito** (для тестирования)
+- **Docker** 
 
 ## Функциональность
 - Регистрация и авторизация пользователей
