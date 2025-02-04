@@ -30,8 +30,14 @@
         <!-- Список добавленных локаций -->
         <h3>Ваши локации</h3>
         <ul class="list-group">
-            <li th:each="location : ${locations}" class="list-group-item d-flex justify-content-between align-items-center">
-                <span th:text="${location.name}">Название локации</span>
+            <li th:each="weather : ${locations}" class="list-group-item">
+                <strong th:text="${weather.city}">Город</strong>
+                <p>Температура: <span th:text="${weather.main.temp}">0</span>°C</p>
+                <p>Ощущается как: <span th:text="${weather.main.feelsLike}">0</span>°C</p>
+                <p>Давление: <span th:text="${weather.main.pressure}">0</span> hPa</p>
+                <p>Влажность: <span th:text="${weather.main.humidity}">0</span>%</p>
+                <p>Скорость ветра: <span th:text="${weather.wind.speed}">0</span> м/с</p>
+                <p>Описание: <span th:text="${weather.weather[0].description}">ясно</span></p>
             </li>
         </ul>
     </div>

@@ -35,7 +35,7 @@ public class HomeController {
         }
 
         // Получаем локации пользователя
-        var locations = locationService.getAllLocations(user.get().getId());
+        var locations = locationService.getAllLocations(user.get());
         model.addAttribute("locations", locations);
 
         // Отображаем домашнюю страницу с локациями

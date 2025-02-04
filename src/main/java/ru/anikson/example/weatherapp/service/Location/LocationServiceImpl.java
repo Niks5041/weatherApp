@@ -7,6 +7,7 @@ import ru.anikson.example.weatherapp.dao.LocationRepository;
 import ru.anikson.example.weatherapp.dao.UserRepository;
 import ru.anikson.example.weatherapp.entity.Location;
 import ru.anikson.example.weatherapp.entity.User;
+import ru.anikson.example.weatherapp.entity.dto.WeatherResponse;
 import ru.anikson.example.weatherapp.service.Weather.WeatherService;
 
 import java.util.List;
@@ -21,8 +22,14 @@ public class LocationServiceImpl implements LocationService {
     private final UserRepository userRepository;
 
     @Override
-    public List<Location> getAllLocations(Integer userId) {
-        return locationRepository.findAllById(userId);
+    public List<WeatherResponse> getAllLocations(User user) {
+       List<Location> locations = locationRepository.findAllByUserId(user);
+       log.info("Пришел запрос на получение списка всех локаций с погодой");
+
+        return locations.stream()
+                .map(location ->
+                        weatherService.getWeatherByCity(location.getName()))
+                .toList();
     }
 
     @Override

@@ -6,9 +6,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.anikson.example.weatherapp.entity.Location;
 import ru.anikson.example.weatherapp.entity.User;
+import ru.anikson.example.weatherapp.entity.dto.WeatherResponse;
 import ru.anikson.example.weatherapp.service.Location.LocationService;
 import ru.anikson.example.weatherapp.service.User.UserService;
 
@@ -52,11 +53,13 @@ public class LocationController {
 
     // Получить все локации для авторизованного пользователя
     @GetMapping("/home")
-    public List<Location> home(HttpServletRequest request) {
+    public String home(HttpServletRequest request, Model model) {
         // Получаем id пользователя из сессии
-        Integer userId = userService.isUserAuthenticated(request).get().getId();
-
+        User user = userService.isUserAuthenticated(request).get();
         // Получаем все локации для пользователя
-        return locationService.getAllLocations(userId);
+        List<WeatherResponse> weatherResponses = locationService.getAllLocations(user);
+        model.addAttribute("locations", weatherResponses);
+
+        return "home";
     }
 }

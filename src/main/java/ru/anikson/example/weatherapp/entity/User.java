@@ -1,6 +1,7 @@
 package ru.anikson.example.weatherapp.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class User {
     private Integer id;
 
     @Column(nullable = false, unique = true)
+    @Email(message = "Неверный формат email")
     private String login;
 
     @Column(nullable = false)

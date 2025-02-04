@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import ru.anikson.example.weatherapp.entity.dto.GeolocationResponse;
 import ru.anikson.example.weatherapp.entity.dto.WeatherResponse;
 
 
@@ -28,10 +27,10 @@ public class WeatherClient {
      */
     public double[] getCoordinatesByCity(String city) {
         String url = String.format("%s/weather?q=%s&appid=%s", geocodingUrl, city, apiKey);
-        GeolocationResponse response = restTemplate.getForObject(url, GeolocationResponse.class);
+        WeatherResponse response = restTemplate.getForObject(url, WeatherResponse.class);
 
         if (response != null) {
-            return new double[]{response.lon(), response.lat()};
+            return new double[]{response.getCoord().getLat(), response.getCoord().getLon()};
         }
         throw new RuntimeException("Не удалось получить координаты для города: " + city);
     }

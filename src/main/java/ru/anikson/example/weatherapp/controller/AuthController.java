@@ -62,6 +62,7 @@ public class AuthController {
                            @RequestParam String password,
                            HttpServletResponse response) {
         log.info("Попытка регистрации пользователя: {}", login);
+
         boolean isRegistered = userService.registerUser(login, password);
 
         if (isRegistered) {
